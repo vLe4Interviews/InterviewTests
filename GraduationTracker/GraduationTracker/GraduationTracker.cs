@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using GraduationTracker.Models;
 using GraduationTracker.Repositories;
 
 namespace GraduationTracker

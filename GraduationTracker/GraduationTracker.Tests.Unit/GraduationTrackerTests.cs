@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GraduationTracker.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GraduationTracker.Tests.Unit
