@@ -71,16 +71,31 @@ namespace GraduationTracker.Tests.Unit
             //tracker.HasGraduated()
         };
             
-            var graduated = new List<Tuple<bool, STANDING>>();
+            var graduatedResults = new List<Tuple<bool, STANDING>>();
 
             foreach(var student in students)
             {
-                graduated.Add(tracker.HasGraduated(diploma, student));      
+                graduatedResults.Add(tracker.HasGraduated(diploma, student));
             }
 
-            
-            Assert.IsFalse(graduated.Any());
 
+            // Assert.IsFalse(graduated.Any());
+            // Tracker is always added. What I think should be tested is to
+            // test every student against `tracker.HasGraduated` and see if the
+            // the results are correct. Ideally they should each be it's own
+            // test case.
+            var expectedResult = new List<Tuple<bool, STANDING>>()
+            {
+                new Tuple<bool, STANDING>(true, STANDING.SumaCumLaude),
+                new Tuple<bool, STANDING>(true, STANDING.MagnaCumLaude),
+                new Tuple<bool, STANDING>(false, STANDING.Average),
+                new Tuple<bool, STANDING>(false, STANDING.Remedial),
+            };
+
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                Assert.AreEqual(expectedResult[i], graduatedResults[i]);
+            }
         }
 
 

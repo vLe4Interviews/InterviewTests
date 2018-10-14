@@ -8,26 +8,26 @@ namespace GraduationTracker
 {
     public partial class GraduationTracker
     {   
-        public Tuple<bool, STANDING>  HasGraduated(Diploma diploma, Student student)
+        public Tuple<bool, STANDING> HasGraduated(Diploma diploma, Student student)
         {
-            var credits = 0;
+            var credits = 0; // Credits is counted, but was never really used.
             var average = 0;
         
-            for(int i = 0; i < diploma.Requirements.Length; i++)
+            foreach (var diplomaRequirement in diploma.Requirements)
             {
-                for(int j = 0; j < student.Courses.Length; j++)
+                var requirement = Repository.GetRequirement(diplomaRequirement);
+                foreach(var requiredCourse in requirement.Courses)
                 {
-                    var requirement = Repository.GetRequirement(diploma.Requirements[i]);
+                    var courseTaken = student.Courses.Where(c => c.Id == requiredCourse);
 
-                    for (int k = 0; k < requirement.Courses.Length; k++)
+                    // Assume course can be taken more than once, but at most
+                    // one successful grade.
+                    foreach(var course in courseTaken)
                     {
-                        if (requirement.Courses[k] == student.Courses[j].Id)
+                        average += course.Mark;
+                        if (course.Mark > requirement.MinimumMark)
                         {
-                            average += student.Courses[j].Mark;
-                            if (student.Courses[j].Mark > requirement.MinimumMark)
-                            {
-                                credits += requirement.Credits;
-                            }
+                            credits += requirement.Credits;
                         }
                     }
                 }
@@ -36,30 +36,27 @@ namespace GraduationTracker
             average = average / student.Courses.Length;
 
             var standing = STANDING.None;
+            var graduated = credits == diploma.Credits;
 
             if (average < 50)
-                standing = STANDING.Remedial;
-            else if (average < 80)
-                standing = STANDING.Average;
-            else if (average < 95)
-                standing = STANDING.MagnaCumLaude;
-            else
-                standing = STANDING.MagnaCumLaude;
-
-            switch (standing)
             {
-                case STANDING.Remedial:
-                    return new Tuple<bool, STANDING>(false, standing);
-                case STANDING.Average:
-                    return new Tuple<bool, STANDING>(true, standing);
-                case STANDING.SumaCumLaude:
-                    return new Tuple<bool, STANDING>(true, standing);
-                case STANDING.MagnaCumLaude:
-                    return new Tuple<bool, STANDING>(true, standing);
+                graduated = false;
+                standing = STANDING.Remedial;
+            }
+            else if (average < 80)
+            {
+                standing = STANDING.Average;
+            }
+            else if (average < 95)
+            {
+                standing = STANDING.MagnaCumLaude;
+            }
+            else
+            {
+                standing = STANDING.SumaCumLaude;
+            }
 
-                default:
-                    return new Tuple<bool, STANDING>(false, standing);
-            } 
+            return new Tuple<bool, STANDING>(graduated, standing);
         }
     }
 }
