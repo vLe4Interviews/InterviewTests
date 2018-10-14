@@ -1,29 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GraduationTracker.Repositories;
 
 namespace GraduationTracker
 {
     public partial class GraduationTracker
-    {   
+    {
         public Tuple<bool, STANDING> HasGraduated(Diploma diploma, Student student)
         {
             // Credits is counted, but was never really used before.
             var credits = 0;
             var average = 0;
-        
+
             foreach (var diplomaRequirement in diploma.Requirements)
             {
-                var requirement = Repository.GetRequirement(diplomaRequirement);
-                foreach(var requiredCourse in requirement.Courses)
+                var requirement = RequirementRepository.GetRequirement(diplomaRequirement);
+                foreach (var requiredCourse in requirement.Courses)
                 {
                     var courseTaken = student.Courses.Where(c => c.Id == requiredCourse);
 
                     // Assume course can be taken more than once, but at most
                     // one successful grade.
-                    foreach(var course in courseTaken)
+                    foreach (var course in courseTaken)
                     {
                         average += course.Mark;
                         if (course.Mark > requirement.MinimumMark)
