@@ -46,7 +46,7 @@
     <Compile Include="Repositories\DiplomaRepository.cs" />
     <Compile Include="Repositories\RequirementRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
-    <Compile Include="STANDING.cs" />
+    <Compile Include="Models\Standing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Requirement.cs" />
     <Compile Include="Models\Student.cs" />

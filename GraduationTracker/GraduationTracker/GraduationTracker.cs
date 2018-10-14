@@ -7,7 +7,7 @@ namespace GraduationTracker
 {
     public partial class GraduationTracker
     {
-        public Tuple<bool, STANDING> HasGraduated(Diploma diploma, Student student)
+        public Tuple<bool, Standing> HasGraduated(Diploma diploma, Student student)
         {
             // Credits is counted, but was never really used before.
             var credits = 0;
@@ -35,28 +35,28 @@ namespace GraduationTracker
 
             average = average / student.Courses.Length;
 
-            var standing = STANDING.None;
+            var standing = Standing.None;
             var graduated = credits == diploma.Credits;
 
             if (average < 50)
             {
                 graduated = false;
-                standing = STANDING.Remedial;
+                standing = Standing.Remedial;
             }
             else if (average < 80)
             {
-                standing = STANDING.Average;
+                standing = Standing.Average;
             }
             else if (average < 95)
             {
-                standing = STANDING.MagnaCumLaude;
+                standing = Standing.MagnaCumLaude;
             }
             else
             {
-                standing = STANDING.SumaCumLaude;
+                standing = Standing.SumaCumLaude;
             }
 
-            return new Tuple<bool, STANDING>(graduated, standing);
+            return new Tuple<bool, Standing>(graduated, standing);
         }
     }
 }

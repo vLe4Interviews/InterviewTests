@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="GraduationTrackerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DiplomaRepositoryTest.cs" />
+    <Compile Include="Repositories\StudentRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

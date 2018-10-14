@@ -68,7 +68,7 @@ namespace GraduationTracker.Tests.Unit
                 }
             };
 
-            var graduatedResults = new List<Tuple<bool, STANDING>>();
+            var graduatedResults = new List<Tuple<bool, Standing>>();
 
             foreach (var student in students)
             {
@@ -81,12 +81,12 @@ namespace GraduationTracker.Tests.Unit
             // test every student against `tracker.HasGraduated` and see if the
             // the results are correct. Ideally they should each be it's own
             // test case.
-            var expectedResult = new List<Tuple<bool, STANDING>>()
+            var expectedResult = new List<Tuple<bool, Standing>>()
             {
-                new Tuple<bool, STANDING>(true, STANDING.SumaCumLaude),
-                new Tuple<bool, STANDING>(true, STANDING.MagnaCumLaude),
-                new Tuple<bool, STANDING>(false, STANDING.Average),
-                new Tuple<bool, STANDING>(false, STANDING.Remedial),
+                new Tuple<bool, Standing>(true, Standing.SumaCumLaude),
+                new Tuple<bool, Standing>(true, Standing.MagnaCumLaude),
+                new Tuple<bool, Standing>(false, Standing.Average),
+                new Tuple<bool, Standing>(false, Standing.Remedial),
             };
 
             for (int i = 0; i < expectedResult.Count; i++)
@@ -119,7 +119,7 @@ namespace GraduationTracker.Tests.Unit
             };
 
             var result = tracker.HasGraduated(diploma, student);
-            Assert.AreEqual(STANDING.SumaCumLaude, result.Item2);
+            Assert.AreEqual(Standing.SumaCumLaude, result.Item2);
             Assert.AreEqual(true, result.Item1);
         }
 
@@ -147,7 +147,7 @@ namespace GraduationTracker.Tests.Unit
             };
 
             var result = tracker.HasGraduated(diploma, student);
-            Assert.AreEqual(STANDING.MagnaCumLaude, result.Item2);
+            Assert.AreEqual(Standing.MagnaCumLaude, result.Item2);
             Assert.AreEqual(true, result.Item1);
         }
 
@@ -175,7 +175,7 @@ namespace GraduationTracker.Tests.Unit
             };
 
             var result = tracker.HasGraduated(diploma, student);
-            Assert.AreEqual(STANDING.Average, result.Item2);
+            Assert.AreEqual(Standing.Average, result.Item2);
             Assert.AreEqual(true, result.Item1);
         }
 
@@ -203,7 +203,7 @@ namespace GraduationTracker.Tests.Unit
             };
 
             var result = tracker.HasGraduated(diploma, student);
-            Assert.AreEqual(STANDING.Remedial, result.Item2);
+            Assert.AreEqual(Standing.Remedial, result.Item2);
             Assert.AreEqual(false, result.Item1);
         }
 
@@ -230,7 +230,7 @@ namespace GraduationTracker.Tests.Unit
             };
 
             var result = tracker.HasGraduated(diploma, student);
-            Assert.AreEqual(STANDING.SumaCumLaude, result.Item2);
+            Assert.AreEqual(Standing.SumaCumLaude, result.Item2);
             Assert.AreEqual(false, result.Item1);
         }
 
@@ -257,7 +257,7 @@ namespace GraduationTracker.Tests.Unit
             };
 
             var result = tracker.HasGraduated(diploma, student);
-            Assert.AreEqual(STANDING.MagnaCumLaude, result.Item2);
+            Assert.AreEqual(Standing.MagnaCumLaude, result.Item2);
             Assert.AreEqual(false, result.Item1);
         }
 
@@ -284,7 +284,7 @@ namespace GraduationTracker.Tests.Unit
             };
 
             var result = tracker.HasGraduated(diploma, student);
-            Assert.AreEqual(STANDING.Average, result.Item2);
+            Assert.AreEqual(Standing.Average, result.Item2);
             Assert.AreEqual(false, result.Item1);
         }
     }
