@@ -10,7 +10,8 @@ namespace GraduationTracker
     {   
         public Tuple<bool, STANDING> HasGraduated(Diploma diploma, Student student)
         {
-            var credits = 0; // Credits is counted, but was never really used.
+            // Credits is counted, but was never really used before.
+            var credits = 0;
             var average = 0;
         
             foreach (var diplomaRequirement in diploma.Requirements)
